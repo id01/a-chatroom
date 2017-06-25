@@ -17,7 +17,7 @@ if ($_SESSION["usertype"] >= $_USERALLOW["kick"] && time() < $_SESSION["expiry"]
 {
 	$userlower = strtolower($_POST["user"]);
 	$userhash = strtoupper(hash('sha1', $userlower));
-	$userprev = (int)trim(exec("grep " . $userhash . " ../data/messages.txt | cut -d 3"));
+	$userprev = (int)trim(exec("grep " . $userhash . " ../data/loginfile.txt | cut -d ' ' -f 3"));
 	if ($userlower == 'admin')
 	{
 		echo "<p>You can't kick the <span class='adminname'>admin</span></p>";

@@ -15,20 +15,21 @@
 	$_POST["username"] = str_replace("&", "&amp;", $_POST["username"]);
 	$_POST["username"] = str_replace("<", "&lt;", $_POST["username"]);
 	$_POST["username"] = str_replace(">", "&gt;", $_POST["username"]);
-	if (!(strpos($_POST["username"], "'") === false || strpos($_POST["username"], "\\") === false))
+	if (!(strpos($_POST["username"], "'") === true || strpos($_POST["username"], "\\") === true))
 	{
-		echo "<script>window.location.replace('login.html?note=4');</script>";
 		$readytocontinue = true;
 	}
 	else
 	{
+		echo "<script>window.location.replace('login.html?note=4');</script>";
 		$readytocontinue = false;
 	}
 	// Compute hash for username
         $userlower=strtolower($_POST["username"]);
         $usersha=strtoupper(hash('sha1', $userlower));
 	// Check for restricted usernames
-	if ($readytocontinue === true && shell_exec("cat data/restricted.txt | grep '^" . $usersha . "$'") != "")
+	if ($readytocontinue == true) {
+	if (shell_exec("cat data/restricted.txt | grep '^" . $usersha . "$'") != "")
 	{
 		echo "<script>window.location.replace('login.html?note=3');</script>";
 	}
@@ -82,7 +83,7 @@
 				$_SESSION["expiry"] = time()+600;
 				$_SESSION["usertype"] = $permit;
 				setcookie("username", $_POST["username"], time()+600);
-				echo "<meta http-equiv='refresh' content='0; index.php'>";
+				echo "<script>window.location.replace('index.php');</script>";
 	                }
 			// Otherwise...
 	                else
@@ -90,6 +91,7 @@
 				echo "<script>window.location.replace('login.html?note=2');</script>";
 			}
 		}
+	}
 	}
 	}
 ?>
