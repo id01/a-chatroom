@@ -1,1 +1,4 @@
 The room was created by the admin.<br /><br />
+<span class='adminname'>admin</span>: test<br /><br />
+<span class='username'>test</span>: Test<br /><br />
+<span class='username'>test</span>: Test<br /><br />

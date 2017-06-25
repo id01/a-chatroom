@@ -19,28 +19,28 @@ if ($_SESSION["userhash"] == strtoupper(hash('sha1', 'admin')) && time() < $_SES
 	{
 		if ($_POST["action"] == "reset")
 		{
-			shell_exec("cd .. && ./clear.sh");
+			shell_exec("cd ../data && ./clear.sh");
 		}
 		if ($_POST["action"] == "u1")
 		{
 			$usersha = strtoupper(hash('sha1', $_POST["user"]));
-			$userhashpass = shell_exec("grep " . $usersha . " ../loginfile.txt | cut -d ' ' -f 1,2");
-			shell_exec("grep -v " . $usersha . " ../loginfile.txt > /tmp/loginfiletmp.txt");
-			shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 0') > ../loginfile.txt; rm /tmp/loginfiletmp.txt");
+			$userhashpass = shell_exec("grep " . $usersha . " ../data/loginfile.txt | cut -d ' ' -f 1,2");
+			shell_exec("grep -v " . $usersha . " ../data/loginfile.txt > /tmp/loginfiletmp.txt");
+			shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 0') > ../data/loginfile.txt; rm /tmp/loginfiletmp.txt");
 		}
 		if ($_POST["action"] == "u2")
 		{
 			$usersha = strtoupper(hash('sha1', $_POST["user"]));
-                        $userhashpass = shell_exec("grep " . $usersha . " ../loginfile.txt | cut -d ' ' -f 1,2");
-                        shell_exec("grep -v " . $usersha . " ../loginfile.txt > /tmp/loginfiletmp.txt");
-                        shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 1') > ../loginfile.txt; rm /tmp/loginfiletmp.txt");
+                        $userhashpass = shell_exec("grep " . $usersha . " ../data/loginfile.txt | cut -d ' ' -f 1,2");
+                        shell_exec("grep -v " . $usersha . " ../data/loginfile.txt > /tmp/loginfiletmp.txt");
+                        shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 1') > ../data/loginfile.txt; rm /tmp/loginfiletmp.txt");
 		}
 		if ($_POST["action"] == "mod")
 		{
 			$usersha = strtoupper(hash('sha1', $_POST["user"]));
-                        $userhashpass = shell_exec("grep " . $usersha . " ../loginfile.txt | cut -d ' ' -f 1,2");
-                        shell_exec("grep -v " . $usersha . " ../loginfile.txt > /tmp/loginfiletmp.txt");
-                        shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 2') > ../loginfile.txt; rm /tmp/loginfiletmp.txt");
+                        $userhashpass = shell_exec("grep " . $usersha . " ../data/loginfile.txt | cut -d ' ' -f 1,2");
+                        shell_exec("grep -v " . $usersha . " ../data/loginfile.txt > /tmp/loginfiletmp.txt");
+                        shell_exec("(cat /tmp/loginfiletmp.txt && echo '" . trim($userhashpass) . " 2') > ../data/loginfile.txt; rm /tmp/loginfiletmp.txt");
 		}
 		echo "<p>The deed is done.</p>";
 	}

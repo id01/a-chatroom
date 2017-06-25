@@ -17,7 +17,7 @@ if ($_SESSION["usertype"] >= $_USERALLOW["kick"] && time() < $_SESSION["expiry"]
 {
 	$userlower = strtolower($_POST["user"]);
 	$userhash = strtoupper(hash('sha1', $userlower));
-	$userprev = (int)trim(exec("grep " . $userhash . " ../messages.txt | cut -d 3"));
+	$userprev = (int)trim(exec("grep " . $userhash . " ../data/messages.txt | cut -d 3"));
 	if ($userlower == 'admin')
 	{
 		echo "<p>You can't kick the <span class='adminname'>admin</span></p>";
@@ -33,14 +33,14 @@ if ($_SESSION["usertype"] >= $_USERALLOW["kick"] && time() < $_SESSION["expiry"]
 	}
 	else if ($_POST["action"] == "kick")
 	{
-		$kickfile = fopen("../restricted.txt", "a");
+		$kickfile = fopen("../data/restricted.txt", "a");
 		fwrite($kickfile, $userhash . "\n");
 		fclose($kickfile);
                	echo "<p>The deed is done.</p>";
 	}
 	else if ($_POST["action"] == "ban")
 	{
-		$banfile = fopen("../banned.txt", "a");
+		$banfile = fopen("../data/banned.txt", "a");
 		fwrite($banfile, $userhash . "\n");
 		fclose($banfile);
 		echo "<p>The deed is done.</p>";
