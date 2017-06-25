@@ -17,7 +17,7 @@ function refresh(pollmeth) {
 	// Short polling
 	if ( pollmeth == 0 )
 	{
-		$("#newnumber").load("number.txt");
+		$("#newnumber").load("data/number.txt");
 		var oldd = document.getElementById("number").innerHTML;
 		var neww = document.getElementById("newnumber").innerHTML;
 		var ress = oldd.localeCompare(neww);
@@ -52,7 +52,7 @@ function refresh(pollmeth) {
 	else if ( pollmeth == 2 )
 	{
 		$.ajax({
-			url: "number.txt",
+			url: "data/number.txt",
 			success: function(response) {
 				var ltrimmed = document.cookie.substring(document.cookie.indexOf("number")) + ";";
 				var oldd = ltrimmed.substring(7, ltrimmed.indexOf(';'));
@@ -85,7 +85,7 @@ function refresh(pollmeth) {
 
 }
 function frefresh() {
-	$("#messagebox").load("messages.txt");
+	$("#messagebox").load("data/messages.txt");
 	document.getElementById("number").innerHTML = document.getElementById("newnumber").innerHTML;
 	document.getElementById("messagebox").innerHTML += "<br>";
 	messagebox.scrollTop = messagebox.scrollHeight;

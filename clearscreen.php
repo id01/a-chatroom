@@ -27,8 +27,8 @@
 		}
 		if ($_USERALLOW["clear"] <= $_SESSION["usertype"])
 		{
-			file_put_contents("messages.txt", "<span class='" . $spanclass . "'>" . $username . "</span> cleared the room.<br /><br />\n");
-			file_put_contents("number.txt", 0);
+			file_put_contents("data/messages.txt", "<span class='" . $spanclass . "'>" . $username . "</span> cleared the room.<br /><br />\n");
+			file_put_contents("data/number.txt", 0);
 		}
 	}
 	else

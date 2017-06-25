@@ -2,7 +2,7 @@
 	// If logged in already, pass.
 	if (isset($_COOKIE["username"]))
 	{
-		echo "<p id='notification'>Continued a previous session.</p>";
+		echo "<p id='notification'>Logged in.</p>";
 	}
         // If not logged in redirect to login page
         else if ($_POST["username"] == "")
@@ -28,37 +28,42 @@
         $userlower=strtolower($_POST["username"]);
         $usersha=strtoupper(hash('sha1', $userlower));
 	// Check for restricted usernames
-	if ($readytocontinue === true && shell_exec("cat restricted.txt | grep '^" . $usersha . "$'") != "")
+	if ($readytocontinue === true && shell_exec("cat data/restricted.txt | grep '^" . $usersha . "$'") != "")
 	{
 		echo "<script>window.location.replace('login.html?note=3');</script>";
 	}
 	// Check for banned usernames
-	else if ($userlower != 'admin' && shell_exec("cat banned.txt | grep '^" . $usersha . "$'") != "")
+	else if ($userlower != 'admin' && shell_exec("cat data/banned.txt | grep '^" . $usersha . "$'") != "")
 	{
-		shell_exec("echo '" . md5($_SERVER['REMOTE_ADDR']) . "' >> banned.txt");
+		file_put_contents("data/banned.txt", md5($_SERVER['REMOTE_ADDR'])."\n", FILE_APPEND);
 		echo "<script>window.location.replace('banned.html');</script>";
 	}
 	else
 	{
         	// Login
 		// Check if username exists
-		$usersave=shell_exec("cat loginfile.txt | grep " . $usersha);
+		$usersaveraw=preg_grep('/^'.$usersha.'/', file("data/loginfile.txt"));
+		if (empty($usersaveraw))
+			$usersave="";
+		else
+			$usersave=array_shift($usersaveraw);
 		// If username does not exist, create the user and reload
 	        if ($usersave == "")
 	        {
-	                shell_exec("echo '" . $usersha . " " . hash('sha256', crypt($_POST["password"], $userlower)) . " 0' >> loginfile.txt");
+			file_put_contents("data/loginfile.txt", $usersha . " " . hash('sha256', crypt($_POST["password"], $userlower)) . " 0\n", FILE_APPEND);
 	                echo "<script>window.location.replace('login.html?note=1');</script>";
 	        }
 	        else
 	        {
+			$usa = explode(" ", $usersave); // UserSaveArray
 			// Get password hash of username specified
-	                $linecont = shell_exec("grep " . $usersha . " loginfile.txt | cut -d ' ' -f 2");
+			$linecont = $usa[1];
 	                $hash = hash('sha256', crypt($_POST["password"], $userlower));
 			// If password specified matches...
 	                if ( trim($linecont) == trim($hash) )
 	                {
 				// Get permissions of username specified
-				$linecont = shell_exec("grep " . $usersha . " loginfile.txt | cut -d ' ' -f 3");
+				$linecont = $usa[2];
 				switch ( (int)trim($linecont) )
 				{
 					case 1: $permit = 1; break;
@@ -77,7 +82,7 @@
 				$_SESSION["expiry"] = time()+600;
 				$_SESSION["usertype"] = $permit;
 				setcookie("username", $_POST["username"], time()+600);
-				echo "<p id='notification'>Logged in.</p>";
+				echo "<meta http-equiv='refresh' content='0; index.php'>";
 	                }
 			// Otherwise...
 	                else

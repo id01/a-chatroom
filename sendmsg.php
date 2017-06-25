@@ -33,13 +33,16 @@
 			$message = str_replace("&", "&amp;", $message);
 		        $message = str_replace("<", "&lt;", $message);
 		        $message = str_replace(">", "&gt;", $message);
-			$messagefile = fopen("messages.txt", "a");
+			$messagefile = fopen("data/messages.txt", "a");
 			fwrite($messagefile, "<span class='" . $spanclass . "'>" . $username . "</span>: " . $message . "<br /><br />\n");
 			fclose($messagefile);
-			$number = (int)trim(file_get_contents("number.txt"))+1;
-			file_put_contents("number.txt", $number);
-			if ((int)$number%4 == 0 && (int)exec("wc -l messages.txt")>$_CONFIG["maxmessages"])
-				shell_exec("tail -n " . $_CONFIG["maxmessages"] . " messages.txt > /tmp/.messages2.txt && cat /tmp/.messages2.txt > messages.txt");
+			$number = (int)trim(file_get_contents("data/number.txt"))+1;
+			file_put_contents("data/number.txt", $number);
+			if ((int)exec("wc -l data/messages.txt")>$_CONFIG["maxmessages"]) {
+				$msgFile = file("data/messages.txt");
+				array_shift($msgFile);
+				file_put_contents("data/messages.txt", $msgFile);
+			}
 		}
 	}
 	else

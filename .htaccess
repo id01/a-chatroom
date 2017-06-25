@@ -1,0 +1,11 @@
+order Deny,Allow
+ErrorDocument 404 "404 error: File Not found"
+<Files "loginfile.txt">
+	Deny from all
+</Files>
+<Files "restricted.txt">
+	Deny from all
+</Files>
+<Files "banned.txt">
+	Deny from all
+</Files>

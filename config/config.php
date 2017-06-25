@@ -11,8 +11,8 @@ $_CONFIG["refreshrate"]=100;
 // Long poll timeout (if applicable) in microseconds
 $_CONFIG["lptimeout"] = 5*1000000;
 
-// Maximum messages stored
-$_CONFIG["maxmessages"] = 12;
+// Maximum messages stored, multiplied by 2
+$_CONFIG["maxmessages"] = 24;
 
 // Maximum length of non-long message
 $_CONFIG["maxlen"] = 512;
