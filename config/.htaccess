@@ -1,0 +1,7 @@
+order Deny,Allow
+<Files "config.php">
+Deny from all
+</Files>
+<Files "restricted_template.txt">
+Deny from all
+</Files>

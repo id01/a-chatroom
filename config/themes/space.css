@@ -1,0 +1,87 @@
+/* style for the page's background */
+
+body {
+	background-color: #202020;
+	color: ffffe6;
+}
+
+/* default button and input box style */
+
+button {
+        background-color: #121222;
+        color: ffffe6;
+}
+
+input {
+        background-color: #121222;
+        color: ffffcc;
+}
+
+/* style for different usernames */
+
+.adminname {
+	font-weight: bold;
+	color: cc3333;
+}
+
+.modname {
+	font-weight: bold;
+	color: 3333cc;
+}
+
+.user2name {
+	font-weight: bold;
+	color: b3b3c0;
+}
+
+.username {
+	font-weight: bold;
+	color: ffffe6;
+}
+
+/* style for message box */
+
+#messagebox {
+	text-align:left;
+	margin-botton:25px;
+	margin-left:25%;
+	padding:10px;
+	height:60%;
+	width:50%;
+	overflow:auto;
+	background-color:303030;
+}
+
+/* style for different specific buttons in room */
+
+#adminbutton {
+	color:white;
+	background-color:black;
+}
+
+#themebutton {
+	color:white;
+	background-color:997733;
+}
+
+#logoutbutton {
+	color:white;
+	background-color:cc3333;
+}
+
+#clearbutton {
+	color:white;
+	background-color:3333cc;
+}
+
+#refreshbutton {
+	color:white;
+	background-color:33cc33;
+}
+
+/* Disabled button style */
+.disabledbutton {
+	color:white;
+	background-color:grey;
+	box-shadow:none;
+}

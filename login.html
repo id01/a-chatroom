@@ -1,0 +1,45 @@
+<html>
+<title>Login</title>
+<head>
+<link type="text/css" rel="stylesheet" href="config/themes/default.css">
+<script src="themesource.js"></script>
+<script src="/bootstrap/js/jquery.js"></script>
+<script src="config/title.js"></script>
+</head>
+<body>
+<script>
+if (document.cookie.indexOf("username=") >= 0)
+{
+	window.location.replace("index.php");
+}
+</script>
+<p id="note"></p>
+<script>
+// Get note from GET parameters
+var notepos = window.location.search.indexOf("note=");
+if (notepos != -1)
+{
+	var trimmed1 = window.location.search.substring(notepos) + ";";
+	var trimmed2 = trimmed1.substring(5, trimmed1.indexOf(';'));
+	var notenum = parseInt(trimmed2);
+	switch (notenum)
+	{
+		case 0: document.getElementById("note").innerHTML = "Please login."; break;
+		case 1: document.getElementById("note").innerHTML = "Account created. Please Login."; break;
+		case 2: document.getElementById("note").innerHTML = "Wrong Password. Please try again."; break;
+		case 3: document.getElementById("note").innerHTML = "Either this username is restricted, or you have been banned."; break;
+		case 4: document.getElementById("note").innerHTML = "The characters \" and \\ are not allowed."; break;
+		case 9001: document.getElementById("note").innerHTML = "I SEE YOU TRY 2 HAK ME. I KNOW WHO YOU ARE!"; break;
+		case 9002: document.getElementById("note").innerHTML = "If you see this, either the world is ending or you are a hacker. Or both. Try logging in again."; break;
+	}
+}
+</script>
+
+<form action="index.php" method="post" style="float: center">
+	<p>Please login or create an account with the form below:</p>
+	<p>Username: <input type="text" name="username" value="" style="width: 250px" autocomplete="off"></p>
+	<p>Password: <input type="password" name="password" value="" style="width: 250px"></p>
+	<p><input type="submit" name="login" value="Login" style="margin-left: 330px"></p>
+</form>
+</body>
+</html>

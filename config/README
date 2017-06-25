@@ -1,0 +1,6 @@
+Title stored in title.js
+Permissions stored in permissions.php
+Basic configurations stored in config.php
+Available themes stored in themes/*.css
+Default theme stored in themes/default.css
+Restricted usernames stored as uppercase sha1 hashes in restricted_template.txt

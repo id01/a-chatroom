@@ -1,0 +1,35 @@
+/* style for different usernames */
+
+.adminname {
+	font-weight: bold;
+	color: red;
+}
+
+.modname {
+	font-weight: bold;
+	color: blue;
+}
+
+.user2name {
+	font-weight: bold;
+	color: grey;
+}
+
+.username {
+	font-weight: bold;
+}
+
+#messagebox {
+	text-align:left;
+	margin-botton:25px;
+	margin-left:25%;
+	padding:10px;
+	height:60%;
+	width:50%;
+	border:6px solid black;
+	overflow:auto;
+}
+
+/* Disabled button style */
+.disabledbutton {
+}
