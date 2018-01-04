@@ -3,7 +3,7 @@ A chatroom.
   
 Installation:  
 * Copy all files to folder.
-* Chown all files in data/ to www-data except clear.sh
+* Chown data/ to www-data, cd to data/ and run ./clear.sh as www-data.
 * Configure stuff using config/
 * Configuration instructions in config/README
   
